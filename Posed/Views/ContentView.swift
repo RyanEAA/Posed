@@ -6,28 +6,21 @@
 //
 
 import SwiftUI
-import Firebase
-import Kingfisher
+
 
 struct ContentView: View {
     
-    @ObservedObject var model = ViewModel()
+    @State var categoryType = "family"
     
     var body: some View {
         
-//        List(model.list){item in
-//
-//            KFImage(URL(string: item.pictureURl))
-//
-//        }
-        CameraView()
+                //CameraView()
+        MenuView(categoryType: self.$categoryType)
         
         
     }
     
-    init() {
-        model.getData()
-    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

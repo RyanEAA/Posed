@@ -18,21 +18,23 @@ struct Item: Identifiable{
 struct MenuView: View {
     
     let categories = [
-        Item(title: "Family", image: "figure.2.and.child.holdinghands", imgColor: .red),
-        Item(title: "Dancing", image:"figure.socialdance",
+        Item(title: "family", image: "figure.2.and.child.holdinghands", imgColor: .red),
+        Item(title: "dancing", image:"figure.socialdance",
              imgColor: .yellow),
-        Item(title: "Friends", image: "figure.2.arms.open",
+        Item(title: "friends", image: "figure.2.arms.open",
              imgColor: .orange),
-        Item(title: "Solo", image: "figure.arms.open",
+        Item(title: "solo", image: "figure.arms.open",
              imgColor: .green),
-        Item(title: "Home", image: "house",
+        Item(title: "home", image: "house",
              imgColor: .blue),
-        Item(title: "Home", image: "house",
+        Item(title: "home", image: "house",
              imgColor: .purple),
-        Item(title: "Dance", image: "figure.dance",
+        Item(title: "dance", image: "figure.dance",
              imgColor: .black),
         
     ]
+    
+    @Binding var categoryType: String
     
     let spacing: CGFloat = 10
     @State private var numberOfCols = 1
@@ -48,8 +50,17 @@ struct MenuView: View {
             
             LazyVGrid(columns: cols, spacing: spacing) {
                 ForEach(categories){item in
-                    Button(action: {}) {
+                    Button(action: {
+                        
+                        self.categoryType = item.title
+                        
+                        print(item.title)
+                        
+                        
+                    }) {
+                        
                         ItemView(item: item)
+                        
                     }
                     .buttonStyle(ItemButtonStyle(cornerRadius: 20))
                 }
@@ -91,6 +102,6 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView(categoryType: .constant("family"))
     }
 }

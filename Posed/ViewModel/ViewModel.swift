@@ -4,7 +4,7 @@
 //
 //  Created by Ryan Aparicio on 3/11/23.
 //
-
+import SwiftUI
 import Foundation
 import Firebase
 
@@ -12,6 +12,8 @@ class ViewModel: ObservableObject{
     
     //@Published var list = ["Apple", "Carrot", "Banana"]
     @Published var list = [Picture]()
+    
+    @State var categoryType = "friends"
     //fetches data items to store in list
     //because its a published library it going update visually
     
@@ -21,7 +23,7 @@ class ViewModel: ObservableObject{
         let db = Firestore.firestore()
         
         //Read the documents at a specific path
-        db.collection("family").getDocuments { snapshot, error in
+        db.collection("\(self.categoryType)").getDocuments { snapshot, error in
             
             //check for error
             if error == nil{//no erros

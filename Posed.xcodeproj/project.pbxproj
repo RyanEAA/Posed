@@ -29,6 +29,7 @@
 		94DFC02129BFA868003E2635 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02029BFA868003E2635 /* ItemView.swift */; };
 		94DFC02329BFAE7E003E2635 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02229BFAE7E003E2635 /* CameraView.swift */; };
 		94DFC02729C027AE003E2635 /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02629C027AE003E2635 /* CameraModel.swift */; };
+		94DFC02A29C0F5F6003E2635 /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02929C0F5F6003E2635 /* PhotoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		94DFC02229BFAE7E003E2635 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		94DFC02629C027AE003E2635 /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		94DFC02829C047C4003E2635 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		94DFC02929C0F5F6003E2635 /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 				94DFBFD729BD469E003E2635 /* ContentView.swift */,
 				94DFC01A29BF95A9003E2635 /* MenuView.swift */,
 				94DFC02229BFAE7E003E2635 /* CameraView.swift */,
+				94DFC02929C0F5F6003E2635 /* PhotoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				94DFC01F29BFA7ED003E2635 /* ItemButtonStyle.swift in Sources */,
 				94DFC02329BFAE7E003E2635 /* CameraView.swift in Sources */,
 				94DFC02729C027AE003E2635 /* CameraModel.swift in Sources */,
+				94DFC02A29C0F5F6003E2635 /* PhotoView.swift in Sources */,
 				94DFC01B29BF95A9003E2635 /* MenuView.swift in Sources */,
 				94DFBFD829BD469E003E2635 /* ContentView.swift in Sources */,
 				94DFC01129BD4F63003E2635 /* ViewModel.swift in Sources */,
