@@ -15,14 +15,13 @@ struct ContentView: View {
     
     var body: some View {
         
-        List(model.list){item in
-            Text(item.name)
-            
-            Text(item.notes)
-            
-            KFImage(URL(string: item.pictureURl))
-            //KFImage(URL(string: item.notes))
-        }
+//        List(model.list){item in
+//
+//            KFImage(URL(string: item.pictureURl))
+//
+//        }
+        CameraView()
+        
         
     }
     

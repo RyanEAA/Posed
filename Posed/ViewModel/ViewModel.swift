@@ -11,7 +11,7 @@ import Firebase
 class ViewModel: ObservableObject{
     
     //@Published var list = ["Apple", "Carrot", "Banana"]
-    @Published var list = [Todo]()
+    @Published var list = [Picture]()
     //fetches data items to store in list
     //because its a published library it going update visually
     
@@ -21,7 +21,7 @@ class ViewModel: ObservableObject{
         let db = Firestore.firestore()
         
         //Read the documents at a specific path
-        db.collection("todos").getDocuments { snapshot, error in
+        db.collection("family").getDocuments { snapshot, error in
             
             //check for error
             if error == nil{//no erros
@@ -36,9 +36,9 @@ class ViewModel: ObservableObject{
                         self.list = snapshot.documents.map { doc in //transforms documents to todos
                             
                             //create Todo item for each document retuned 
-                            return Todo(id: doc.documentID,
-                                        name: doc["name"] as? String ?? "",
-                                        notes: doc["notes"] as? String ?? "",
+                            return Picture(id: doc.documentID,
+                                        //name: doc["name"] as? String ?? "",
+                                        //notes: doc["notes"] as? String ?? "",
                                         pictureURl: doc["picture"] as? String ?? "")
                         }
                         

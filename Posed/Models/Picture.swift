@@ -9,11 +9,10 @@ import Foundation
 
 //represents todo documents
 
-struct Todo: Identifiable   {
+struct Picture: Identifiable   {
     
     var id: String
-    var name: String
-    var notes: String
+    
     var pictureURl: String
     
 }

@@ -18,6 +18,7 @@ struct PosedApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            
         }
     }
 }
