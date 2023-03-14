@@ -27,6 +27,7 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     
     func Check(){
         //first checking to see if camera has permission
+        
         switch AVCaptureDevice.authorizationStatus(for: .video){
             
         case .authorized:
@@ -82,11 +83,12 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     func takePic(){
         DispatchQueue.global(qos: .background).async {
             self.output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
-            self.session.stopRunning()
+            
             
             DispatchQueue.main.async {
                 withAnimation{self.isTaken.toggle()}
             }
+            self.session.stopRunning()
         }
     }
     
@@ -116,12 +118,16 @@ class CameraModel: NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     }
     
     func savePic(){
-        let image = UIImage(data: self.picData)!
         
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        
-        self.isSaved = true
-        
-        print("saved sucess")
+        guard let image = UIImage(data: self.picData) else {
+                print("Error: Failed to create UIImage from picData")
+                return
+            }
+            
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            
+            self.isSaved = true
+            
+            print("Saved successfully")
     }
 }
