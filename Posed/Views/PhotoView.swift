@@ -14,10 +14,26 @@ struct PhotoView: View {
     @ObservedObject var model = ViewModel()
     
     var body: some View {
-        List(model.list){item in
+        
+        VStack{
+            List(model.list){item in
 
-            KFImage(URL(string: item.pictureURl))
+                KFImage(URL(string: item.pictureURl))
+                
+                
 
+            }
+            
+            Button(action: {
+                
+                print(model.categoryType)
+                
+                
+            }) {
+                
+                Text("\(model.categoryType)")
+                
+            }
         }
 
     }

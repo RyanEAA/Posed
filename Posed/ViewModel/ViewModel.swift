@@ -13,7 +13,7 @@ class ViewModel: ObservableObject{
     //@Published var list = ["Apple", "Carrot", "Banana"]
     @Published var list = [Picture]()
     
-    @State var categoryType = "friends"
+    @Published var categoryType: String = "friends"
     //fetches data items to store in list
     //because its a published library it going update visually
     
@@ -23,7 +23,7 @@ class ViewModel: ObservableObject{
         let db = Firestore.firestore()
         
         //Read the documents at a specific path
-        db.collection("\(self.categoryType)").getDocuments { snapshot, error in
+        db.collection("\(categoryType)").getDocuments { snapshot, error in
             
             //check for error
             if error == nil{//no erros

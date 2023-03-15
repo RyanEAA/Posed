@@ -34,7 +34,7 @@ struct MenuView: View {
         
     ]
     
-    @Binding var categoryType: String
+    @StateObject var viewModel = ViewModel()
     
     let spacing: CGFloat = 10
     @State private var numberOfCols = 1
@@ -43,33 +43,45 @@ struct MenuView: View {
         let cols = Array(
             repeating: GridItem(.flexible(), spacing: spacing), count: numberOfCols)
 
-        
-        ScrollView {
-            
-            headerView
-            
-            LazyVGrid(columns: cols, spacing: spacing) {
-                ForEach(categories){item in
-                    Button(action: {
+        NavigationView{
+            ScrollView {
+                
+                headerView
+                
+                LazyVGrid(columns: cols, spacing: spacing) {
+                    ForEach(categories){item in
                         
-                        self.categoryType = item.title
+                        NavigationLink(destination: PhotoView()) {
+                            ItemView(item: item)
+                                .environmentObject(viewModel)
+                        }
+                        .buttonStyle(ItemButtonStyle(cornerRadius: 20))
                         
-                        print(item.title)
                         
+                        Button(action: {
+                            
+                            viewModel.categoryType = item.title
+                            
+                            print(viewModel.categoryType)
+                            
+                            
+                        }) {
+                            
+                            ItemView(item: item)
+                            
+                        }
+                        .buttonStyle(ItemButtonStyle(cornerRadius: 20))
                         
-                    }) {
-                        
-                        ItemView(item: item)
-                        
+                        Button(viewModel.categoryType){viewModel.categoryType = item.title }
                     }
-                    .buttonStyle(ItemButtonStyle(cornerRadius: 20))
                 }
+                .padding(.horizontal)
+                .offset(y: -50)
             }
-            .padding(.horizontal)
-            .offset(y: -50)
+            .background(Color.white)
+            .ignoresSafeArea()
+            
         }
-        .background(Color.white)
-        .ignoresSafeArea()
         
     }
     
@@ -102,6 +114,6 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView(categoryType: .constant("family"))
+        MenuView()
     }
 }
