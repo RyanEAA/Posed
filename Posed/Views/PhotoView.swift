@@ -12,39 +12,21 @@ import Kingfisher
 struct PhotoView: View {
     
     @ObservedObject var model = ViewModel()
-    
-    var body: some View {
-        
-        VStack{
-            List(model.list){item in
+        @Binding var categoryType: String
 
+        var body: some View {
+            List(model.list) { item in
                 KFImage(URL(string: item.pictureURl))
-                
-                
-
             }
-            
-            Button(action: {
-                
-                print(model.categoryType)
-                
-                
-            }) {
-                
-                Text("\(model.categoryType)")
-                
+            .onAppear {
+                model.categoryType = categoryType
+                model.getData()
             }
         }
-
-    }
-    
-    init() {
-        model.getData()
-    }
 }
 
 struct PhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoView()
+        PhotoView(categoryType: .constant("friends"))
     }
 }

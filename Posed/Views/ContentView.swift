@@ -10,12 +10,12 @@ import SwiftUI
 
 struct ContentView: View {
     
-    //@State var categoryType = "family"
+    @State var categoryType = "friends"
     
     var body: some View {
         
                 //CameraView()
-        MenuView()
+        MenuView(categoryType: $categoryType)
         
         
     }

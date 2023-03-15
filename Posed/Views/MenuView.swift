@@ -35,6 +35,7 @@ struct MenuView: View {
     ]
     
     @StateObject var viewModel = ViewModel()
+    @Binding var categoryType: String // <-- add a binding property
     
     let spacing: CGFloat = 10
     @State private var numberOfCols = 1
@@ -51,7 +52,7 @@ struct MenuView: View {
                 LazyVGrid(columns: cols, spacing: spacing) {
                     ForEach(categories){item in
                         
-                        NavigationLink(destination: PhotoView()) {
+                        NavigationLink(destination: PhotoView(categoryType: $categoryType)) {
                             ItemView(item: item)
                                 .environmentObject(viewModel)
                         }
@@ -59,6 +60,8 @@ struct MenuView: View {
                         
                         
                         Button(action: {
+                            
+                            categoryType = item.title // <-- update the categoryType
                             
                             viewModel.categoryType = item.title
                             
@@ -114,6 +117,6 @@ struct MenuView: View {
 
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuView()
+        MenuView(categoryType: .constant("friends"))
     }
 }
