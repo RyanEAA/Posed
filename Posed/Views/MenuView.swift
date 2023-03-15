@@ -18,7 +18,8 @@ struct Item: Identifiable{
 struct MenuView: View {
     
     let categories = [
-        Item(title: "family", image: "figure.2.and.child.holdinghands", imgColor: .red),
+        Item(title: "family", image: "figure.2.and.child.holdinghands",
+             imgColor: .red),
         Item(title: "dancing", image:"figure.socialdance",
              imgColor: .yellow),
         Item(title: "friends", image: "figure.2.arms.open",
@@ -27,10 +28,8 @@ struct MenuView: View {
              imgColor: .green),
         Item(title: "home", image: "house",
              imgColor: .blue),
-        Item(title: "home", image: "house",
+        Item(title: "random", image: "house",
              imgColor: .purple),
-        Item(title: "dance", image: "figure.dance",
-             imgColor: .black),
         
     ]
     
@@ -52,30 +51,13 @@ struct MenuView: View {
                 LazyVGrid(columns: cols, spacing: spacing) {
                     ForEach(categories){item in
                         
-                        NavigationLink(destination: PhotoView(categoryType: $categoryType)) {
+                        NavigationLink(destination: PhotoView(categoryType: item.title)) {
                             ItemView(item: item)
                                 .environmentObject(viewModel)
                         }
                         .buttonStyle(ItemButtonStyle(cornerRadius: 20))
                         
-                        
-                        Button(action: {
-                            
-                            categoryType = item.title // <-- update the categoryType
-                            
-                            viewModel.categoryType = item.title
-                            
-                            print(viewModel.categoryType)
-                            
-                            
-                        }) {
-                            
-                            ItemView(item: item)
-                            
-                        }
-                        .buttonStyle(ItemButtonStyle(cornerRadius: 20))
-                        
-                        Button(viewModel.categoryType){viewModel.categoryType = item.title }
+                    
                     }
                 }
                 .padding(.horizontal)

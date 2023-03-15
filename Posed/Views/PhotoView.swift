@@ -12,7 +12,7 @@ import Kingfisher
 struct PhotoView: View {
     
     @ObservedObject var model = ViewModel()
-        @Binding var categoryType: String
+        var categoryType: String
 
         var body: some View {
             List(model.list) { item in
@@ -27,6 +27,6 @@ struct PhotoView: View {
 
 struct PhotoView_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoView(categoryType: .constant("friends"))
+        PhotoView(categoryType: "friends")
     }
 }
