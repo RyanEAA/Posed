@@ -13,6 +13,6 @@ struct Picture: Identifiable   {
     
     var id: String
     
-    var pictureURl: String
+    var pictureURL: String
     
 }

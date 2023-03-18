@@ -41,7 +41,7 @@ class ViewModel: ObservableObject{
                             return Picture(id: doc.documentID,
                                         //name: doc["name"] as? String ?? "",
                                         //notes: doc["notes"] as? String ?? "",
-                                        pictureURl: doc["picture"] as? String ?? "")
+                                        pictureURL: doc["picture"] as? String ?? "")
                         }
                         
                     }

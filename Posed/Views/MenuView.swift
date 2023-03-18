@@ -35,6 +35,7 @@ struct MenuView: View {
     
     @StateObject var viewModel = ViewModel()
     @Binding var categoryType: String // <-- add a binding property
+    //@Binding var picURL: String
     
     let spacing: CGFloat = 10
     @State private var numberOfCols = 1
@@ -51,13 +52,11 @@ struct MenuView: View {
                 LazyVGrid(columns: cols, spacing: spacing) {
                     ForEach(categories){item in
                         
-                        NavigationLink(destination: PhotoView(categoryType: item.title)) {
+                        NavigationLink(destination: CardSwipingView(categoryType: item.title)) {
                             ItemView(item: item)
                                 .environmentObject(viewModel)
                         }
                         .buttonStyle(ItemButtonStyle(cornerRadius: 20))
-                        
-                    
                     }
                 }
                 .padding(.horizontal)
