@@ -7,16 +7,18 @@
 //https://www.youtube.com/watch?v=O2JXv9BnE70&ab_channel=Indently
 import SwiftUI
 
+import SwiftUI
+
 struct CardSwipingView: View {
     var categoryType: String
-    //private var people: [String] = ["mario", "luigi", "toad", "Peach"].reversed()
     
     @ObservedObject var model = ViewModel()
-    var body: some View {
-        VStack{
-            ZStack{
-                ForEach(model.list){ item in
+    //@State private var showCameraView: Bool = false
 
+    var body: some View {
+        VStack {
+            ZStack {
+                ForEach(model.list) { item in
                     CardView(pictureURL: item.pictureURL)
                 }
             }

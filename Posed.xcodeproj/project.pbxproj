@@ -33,6 +33,7 @@
 		94DFC02C29C35469003E2635 /* SinglePicCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02B29C35469003E2635 /* SinglePicCameraView.swift */; };
 		94DFC02E29C4EBB3003E2635 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02D29C4EBB3003E2635 /* CardView.swift */; };
 		94DFC03029C4EBF2003E2635 /* CardSwipingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC02F29C4EBF1003E2635 /* CardSwipingView.swift */; };
+		94DFC03229C82556003E2635 /* PhotoAndCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DFC03129C82556003E2635 /* PhotoAndCameraView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		94DFC02B29C35469003E2635 /* SinglePicCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePicCameraView.swift; sourceTree = "<group>"; };
 		94DFC02D29C4EBB3003E2635 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		94DFC02F29C4EBF1003E2635 /* CardSwipingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardSwipingView.swift; sourceTree = "<group>"; };
+		94DFC03129C82556003E2635 /* PhotoAndCameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAndCameraView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,10 +178,11 @@
 				94DFBFD729BD469E003E2635 /* ContentView.swift */,
 				94DFC01A29BF95A9003E2635 /* MenuView.swift */,
 				94DFC02229BFAE7E003E2635 /* CameraView.swift */,
-				94DFC02B29C35469003E2635 /* SinglePicCameraView.swift */,
 				94DFC02D29C4EBB3003E2635 /* CardView.swift */,
-				94DFC02929C0F5F6003E2635 /* PhotoView.swift */,
 				94DFC02F29C4EBF1003E2635 /* CardSwipingView.swift */,
+				94DFC03129C82556003E2635 /* PhotoAndCameraView.swift */,
+				94DFC02B29C35469003E2635 /* SinglePicCameraView.swift */,
+				94DFC02929C0F5F6003E2635 /* PhotoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				94DFC02129BFA868003E2635 /* ItemView.swift in Sources */,
 				94DFBFD629BD469E003E2635 /* PosedApp.swift in Sources */,
 				94DFC01429BD5184003E2635 /* Picture.swift in Sources */,
+				94DFC03229C82556003E2635 /* PhotoAndCameraView.swift in Sources */,
 				94DFC03029C4EBF2003E2635 /* CardSwipingView.swift in Sources */,
 				94DFC02E29C4EBB3003E2635 /* CardView.swift in Sources */,
 				94DFC02C29C35469003E2635 /* SinglePicCameraView.swift in Sources */,

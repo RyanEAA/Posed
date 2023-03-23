@@ -4,18 +4,18 @@
 //
 //  Created by Ryan Aparicio on 2/21/23.
 //
-
 import SwiftUI
 import Kingfisher
 
 struct CardView: View {
-    //@State private var isCameraViewPresented = false
+    
     var pictureURL: String
     @State private var offset = CGSize.zero
-    @State private var color: Color = .black //card color
+    @State private var color: Color = .black
+    @State private var isCameraViewPresented = false // Add this state to manage sheet presentation
+
     var body: some View {
         ZStack{
-            
             KFImage(URL(string: pictureURL))
                 .resizable()
                 .frame(width: 310, height: 410)
@@ -26,36 +26,34 @@ struct CardView: View {
                 .cornerRadius(4)
                 .foregroundColor(color.opacity(0.2))
                 .shadow(radius: 5)
-            
-            
         }
-        .offset(x: offset.width, y:offset.height*0.4)
-        .rotationEffect(.degrees((Double(offset.width/40)))) //gives card rotation
+        .offset(x: offset.width, y: offset.height * 0.4)
+        .rotationEffect(.degrees((Double(offset.width / 40))))
         .gesture(
             TapGesture()
-                .onEnded { //Navigate to CameraView
+                .onEnded {
                     print("\(pictureURL)")
-                    //isCameraViewPresented = true
-                    
+                    isCameraViewPresented = true // Set isCameraViewPresented to true when tapped
                 }
-                .simultaneously(with: DragGesture().onChanged{gesture in
+                .simultaneously(with: DragGesture().onChanged { gesture in
                     offset = gesture.translation
-                    withAnimation {//color changing
-                        changeColor(width: offset.width) //changes card color
+                    withAnimation {
+                        changeColor(width: offset.width)
                     }
-                } .onEnded{_ in
-                    withAnimation{
+                } .onEnded { _ in
+                    withAnimation {
                         swipeCard(width: offset.width)
                         changeColor(width: offset.width)
                     }
                 })
         )
-//        .fullScreenCover(isPresented: $isCameraViewPresented) {
-//                    CameraView(pictureURL: pictureURL)
-//                }
+        .sheet(isPresented: $isCameraViewPresented) {
+            CameraView(pictureURL: pictureURL)
+        }
         
         
     }
+    
     func swipeCard(width: CGFloat){
         switch width {
         case -500...(-150): //swiped to left
