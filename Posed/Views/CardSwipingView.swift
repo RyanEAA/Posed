@@ -14,12 +14,14 @@ struct CardSwipingView: View {
     
     @ObservedObject var model = ViewModel()
     //@State private var showCameraView: Bool = false
+    @State private var isCameraViewPresented = false
 
     var body: some View {
         VStack {
             ZStack {
                 ForEach(model.list) { item in
                     CardView(pictureURL: item.pictureURL)
+                    
                 }
             }
             .onAppear {

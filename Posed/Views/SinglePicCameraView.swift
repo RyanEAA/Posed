@@ -15,11 +15,20 @@ struct SinglePicCameraView: View {
     
     var body: some View {
         VStack{
-            KFImage(URL(string: pictureURL))
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200)
-                .opacity(opacity)
+            ZStack{
+                Rectangle()
+                    .frame(width: 320, height: 420)
+                    .border(.white, width: 6.0)
+                    .cornerRadius(4)
+                KFImage(URL(string: pictureURL))
+                    .resizable()
+                    .frame(width: 310, height: 410)
+                    .scaledToFit()
+                
+
+
+            }
+            .opacity(opacity)
             
             Slider(value: $opacity)
                             .padding()

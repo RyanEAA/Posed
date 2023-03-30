@@ -14,6 +14,8 @@ class ViewModel: ObservableObject{
     @Published var list = [Picture]()
     
     @Published var categoryType: String = "friends"
+    
+    @Published var categories = [Category]()
     //fetches data items to store in list
     //because its a published library it going update visually
     
@@ -55,5 +57,6 @@ class ViewModel: ObservableObject{
         }
         
     }
+
     
 }

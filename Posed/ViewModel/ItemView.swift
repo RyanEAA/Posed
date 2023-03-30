@@ -24,6 +24,7 @@ struct ItemView: View{
                     .resizable()
                     .scaledToFit()
                     .foregroundColor(item.imgColor)
+                    .rotation3DEffect(.degrees(15), axis: (x: 0, y: 1, z: 0)) // Add this line for 3D effect
                     .frame(width: imageWidth)
                 
                 Text(item.title)

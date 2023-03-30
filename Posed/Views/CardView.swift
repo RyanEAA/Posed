@@ -47,9 +47,9 @@ struct CardView: View {
                     }
                 })
         )
-        .sheet(isPresented: $isCameraViewPresented) {
-            CameraView(pictureURL: pictureURL)
-        }
+        .fullScreenCover(isPresented: $isCameraViewPresented) {
+                    CameraView(pictureURL: pictureURL)
+                }
         
         
     }
