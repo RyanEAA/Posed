@@ -7,11 +7,16 @@
 
 import SwiftUI
 import FirebaseAuth
+import Firebase
+import FirebaseStorage
 
 class AppViewModel: ObservableObject{
     
     
     let auth = Auth.auth()
+    @Published var currentUser: User?//optional bc API take time to call, and user info will be nill for a sec
+    private var tempUserSession: FirebaseAuth.User?
+    @Published var userSession: FirebaseAuth.User? // stores user session, if user is logged in
     
     @Published var signedIn = false
     
@@ -54,6 +59,13 @@ class AppViewModel: ObservableObject{
         
         self.signedIn = false
     }
+    
+    func uploadProfileImage(_ image: UIImage){
+        guard let uid = tempUserSession?.uid else {return}
+        
+    }
+    
+    
 }
 
 struct SignInView: View {
@@ -122,3 +134,4 @@ struct LoginView_Previews: PreviewProvider {
         SignInView()
     }
 }
+
