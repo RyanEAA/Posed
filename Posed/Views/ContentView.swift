@@ -18,10 +18,13 @@ struct ContentView: View {
         NavigationView{
             if viewModel.signedIn{
 
-                NavigationLink(destination: MenuView(categoryType: $categoryType)) {
-                    Text("Thank You!")
-                    Text("Enjoy the Show!")
+                VStack{
+
+                        MenuView(categoryType: $categoryType)
                 }
+
+
+                
                 
             }
             else{

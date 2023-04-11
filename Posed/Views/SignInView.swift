@@ -41,15 +41,33 @@ class AppViewModel: ObservableObject{
         
     }
     
-    func signUp(email: String, password: String){
-        auth.createUser(withEmail: email, password: password){ [weak self] result, error in
-            
-            guard result != nil, error == nil else{
+    func signUp(email: String, password: String) {
+        auth.createUser(withEmail: email, password: password) { [weak self] result, error in
+            guard result != nil, error == nil else {
                 return
             }
-            //succses
+            
+            guard let user = result?.user else { return }
+            self?.createUserDocument(uid: user.uid) // Add this line
+            
             DispatchQueue.main.async {
                 self?.signedIn = true
+            }
+        }
+    }
+    
+    func createUserDocument(uid: String) {
+        let newUser: [String: Any] = [
+            "uid": uid,
+            "profilePicture": ""
+        ]
+
+        let usersCollection = Firestore.firestore().collection("users")
+        usersCollection.document(uid).setData(newUser) { error in
+            if let error = error {
+                print("Error creating user document: \(error.localizedDescription)")
+            } else {
+                print("User document created successfully")
             }
         }
     }
@@ -59,14 +77,12 @@ class AppViewModel: ObservableObject{
         
         self.signedIn = false
     }
-    
-    func uploadProfileImage(_ image: UIImage){
-        guard let uid = tempUserSession?.uid else {return}
-        
-    }
+
     
     
 }
+
+
 
 struct SignInView: View {
     

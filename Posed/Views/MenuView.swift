@@ -1,4 +1,7 @@
 import SwiftUI
+import FirebaseStorage
+import Firebase
+import FirebaseFirestore
 
 struct Item: Identifiable {
     let id = UUID()
@@ -8,10 +11,14 @@ struct Item: Identifiable {
 }
 
 struct MenuView: View {
+    
     @EnvironmentObject var signInViewModel: AppViewModel
     
     @State private var searchText = ""
     @State private var showSearchBar = false
+    
+    @State private var showImagePicker = false
+    @State private var selectedImage: UIImage?
     
     struct Category: Identifiable {
         let id: String
@@ -70,8 +77,15 @@ struct MenuView: View {
             }
             .background(Color.white)
             .ignoresSafeArea()
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(selectedImage: $selectedImage, uploadImage: uploadImageToFirebase)
+            }
+            .onAppear {
+                fetchUserProfileImage()
+            }
         }
     }
+    
     
     var headerView: some View {
 
@@ -79,7 +93,7 @@ struct MenuView: View {
             
             
             // Search bar
-            //HStack {
+            HStack {
                 Button {
                     signInViewModel.signOut()
                 } label: {
@@ -91,6 +105,7 @@ struct MenuView: View {
                         .padding()
                     
                 }
+                
                 HStack {
                     Spacer()
                     if showSearchBar {
@@ -99,7 +114,7 @@ struct MenuView: View {
                             .background(Color.white)
                             .cornerRadius(10)
                             .transition(.move(edge: .trailing))
-                            .animation(.default)
+
                     } else {
                         Button(action: {
                             withAnimation {
@@ -127,22 +142,76 @@ struct MenuView: View {
                     Spacer().frame(width: 10)
                 }
                 
-            //}
+            }
             .offset(y: -50)
             
-            Image("")
+            Image(uiImage: selectedImage ?? UIImage())
                 .resizable()
                 .frame(width: 110, height: 110)
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color.white, lineWidth: 4))
                 .onTapGesture {
-                    numberOfCols = numberOfCols % 3 + 1
+                    showImagePicker = true
                 }
         }
         .frame(height: 350)
         .frame(maxWidth: .infinity)
         .background(Color.purple)
     }
+   
+    
+    func uploadImageToFirebase() {
+        guard let image = selectedImage, let userId = Auth.auth().currentUser?.uid else { return }
+        let data = image.jpegData(compressionQuality: 0.75)
+        let imageName = UUID().uuidString
+
+        let storageRef = Storage.storage().reference().child("profilePictures/\(imageName).jpeg")
+        storageRef.putData(data!, metadata: nil) { _, error in
+            if let error = error {
+                print("Error uploading image: \(error.localizedDescription)")
+            } else {
+                storageRef.downloadURL { url, error in
+                    if let error = error {
+                        print("Error getting download URL: \(error.localizedDescription)")
+                    } else if let url = url {
+                        let documentRef = Firestore.firestore().collection("users").document(userId)
+                        documentRef.updateData(["profilePicture": url.absoluteString]) { error in
+                            if let error = error {
+                                print("Error saving profile picture URL to Firestore: \(error.localizedDescription)")
+                            } else {
+                                print("Profile picture URL saved to Firestore.")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    func fetchUserProfileImage() {
+        guard let userId = Auth.auth().currentUser?.uid else { return }
+        let documentRef = Firestore.firestore().collection("users").document(userId)
+
+        documentRef.getDocument { document, error in
+            if let error = error {
+                print("Error fetching user data: \(error.localizedDescription)")
+            } else if let document = document, document.exists {
+                if let urlString = document.get("profilePicture") as? String,
+                   let url = URL(string: urlString) {
+                    URLSession.shared.dataTask(with: url) { data, _, error in
+                        if let error = error {
+                            print("Error fetching profile image: \(error.localizedDescription)")
+                        } else if let data = data {
+                            DispatchQueue.main.async {
+                                selectedImage = UIImage(data: data)
+                            }
+                        }
+                    }.resume()
+                }
+            }
+        }
+    }
+    
+    
 }
 
 struct MenuView_Previews: PreviewProvider {
